@@ -14,7 +14,7 @@ contract MyToken is ERC20, Ownable{
         _mint(account, amount);
     }
 
-    function burn(uint256 amount) public  {
+    function burn(uint256 amount) public onlyOwner {
         _burn(msg.sender, amount);
     }
 }
@@ -94,7 +94,7 @@ contract BuyNftSword is ERC1155, Ownable, ReentrancyGuard {
         require(amountBought[msg.sender] >= 5, "Unqualified");
         require(balanceOf(msg.sender, 0) >= 2,"Insufficient quantity of Token ID 0");
         
-        if(generateRandomNumber() >= 70){
+        if(generateRandomNumber() >= 50){
             _mint(msg.sender,1, 1,"");   
         }     
         _burn(msg.sender, 0, 2);
