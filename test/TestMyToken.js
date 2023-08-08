@@ -62,15 +62,15 @@ describe("BuySwordNft contract", function () {
     // buy ether
     it("Buy with ether", async function () {
         const tokenId = 0; // swordWoodId
-        const quantity = 1;
+        const quantity = 2; 
         const price = await buyNftSword.nftPrices(tokenId);
     
-        await buyNftSword.connect(owner).buyNft(true, tokenId, quantity, { value: price });
+        await buyNftSword.connect(owner).buyNft(true, tokenId, quantity, { value: price * BigInt(quantity) });
     
         const nftBalance = await buyNftSword.balanceOf(owner.address, tokenId);
         //console.log("nft balance",nftBalance);
         expect(nftBalance).to.equal(quantity);
-      });
+    });
 
     // buy token
     it("Buy with token", async function (){
@@ -81,20 +81,21 @@ describe("BuySwordNft contract", function () {
         // mint token
         await myToken.mint(owner, ethers.parseEther(quantityMintToken));
         //console.log("balance of", await myToken.balanceOf(owner));
+        const nftBalanceBefore =   await buyNftSword.balanceOf(owner.address, tokenId);
         
         const addr = await buyNftSword.getAddress();
         await myToken.connect(owner).approve(addr, ethers.parseEther(quantityMintToken));
 
         //buy nft = token
         await buyNftSword.connect(owner).buyNft(false, tokenId, quantity);
-        const nftBalance = await buyNftSword.balanceOf(owner.address, tokenId);
-        expect(nftBalance).to.equal(5);  
+        const nftBalanceAfter = await buyNftSword.balanceOf(owner.address, tokenId);
+        expect(nftBalanceAfter).to.equal(nftBalanceBefore + BigInt(quantity));  
     });
 
     it("Swap", async function () {  
         const amountBought = await buyNftSword.amountBought(owner.address);
         //console.log("amount Bought",amountBought);
-        //console.log("balance ",await buyNftSword.balanceOf(owner.address, 0))
+        console.log("balance ",await buyNftSword.balanceOf(owner.address, 0))
         //await expect(buyNftSword.connect(owner).swapNft()).to.be.revertedWith("Unqualified");
         
         const beforeSwapId0 = await buyNftSword.balanceOf(owner,0)
