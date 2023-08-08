@@ -50,7 +50,8 @@ contract BuyNftSword is ERC1155, Ownable, ReentrancyGuard {
     }
 
     modifier onlyOnSale() {
-        require(block.timestamp >= startTime && block.timestamp <= endTime, "Not yet time for sale");// tach ra
+        require(block.timestamp >= startTime, "It's not time on sale");
+        require(block.timestamp <= endTime, "Passed time on sale");
         _;
     } 
     
@@ -78,7 +79,7 @@ contract BuyNftSword is ERC1155, Ownable, ReentrancyGuard {
             _mint(msg.sender, tokenId, quantity,"");
             amountBought[msg.sender] += quantity;            
         } else {
-            require(msg.value == 0, "dont need native coin");
+            require(msg.value == 0, "Dont need ether");
             token.transferFrom(msg.sender, address(this), totalPrice);
             _mint(msg.sender, tokenId, quantity,"");
             amountBought[msg.sender] += quantity;
