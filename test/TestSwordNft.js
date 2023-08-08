@@ -98,15 +98,11 @@ describe("BuySwordNft contract", function () {
     });
 
     it("Swap", async function () {  
-        
-        const amountBought = await buyNftSword.amountBought(owner.address);
         const beforeSwapId0 = await buyNftSword.balanceOf(owner,0)
-        const beforeSwapId1 = await buyNftSword.balanceOf(owner,1)
 
         await buyNftSword.connect(owner).swapNft()
         
         const afterSwapId0 = await buyNftSword.balanceOf(owner,0)
-        const afterSwapId1 = await buyNftSword.balanceOf(owner,1)
 
         expect(afterSwapId0).to.equal(beforeSwapId0 - BigInt(2));
     });
@@ -117,6 +113,7 @@ describe("BuySwordNft contract", function () {
 
     it("Insufficient quantity of Token ID 0", async function() {
         const price = await buyNftSword.nftPrices(1);
+        
         await buyNftSword.connect(signer1).buyNft(true, 1, 6, { value: price * BigInt(6) });  
         await expect(buyNftSword.connect(signer1).swapNft()).to.be.revertedWith("Insufficient quantity of Token ID 0");
     });
