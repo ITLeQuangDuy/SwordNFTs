@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\LeQuangDuy\\Desktop\\HARDHAT\\Sword\\contracts\\Sword.sol": {
-      "lastModificationDate": 1691478322893,
-      "contentHash": "2c26a3c6323d59d6dd8ef561f36d24eb",
+      "lastModificationDate": 1691481275357,
+      "contentHash": "3a41a6b948eb9818c59730f3bf0fce71",
       "sourceName": "contracts/Sword.sol",
       "solcConfig": {
         "version": "0.8.19",
@@ -29,17 +29,16 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
         "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
         "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/security/ReentrancyGuard.sol"
+        "@openzeppelin/contracts/security/ReentrancyGuard.sol",
+        "./MyToken.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "BuyNftSword",
-        "MyToken"
+        "BuyNftSword"
       ]
     },
     "C:\\Users\\LeQuangDuy\\Desktop\\HARDHAT\\Sword\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
@@ -518,6 +517,44 @@
       ],
       "artifacts": [
         "IERC165"
+      ]
+    },
+    "C:\\Users\\LeQuangDuy\\Desktop\\HARDHAT\\Sword\\contracts\\MyToken.sol": {
+      "lastModificationDate": 1691481289127,
+      "contentHash": "8388fe550f7c2bc0b02c48a9e6301dce",
+      "sourceName": "contracts/MyToken.sol",
+      "solcConfig": {
+        "version": "0.8.19",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/access/Ownable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "MyToken"
       ]
     }
   }
